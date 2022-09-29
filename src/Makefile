@@ -17,9 +17,14 @@ default :
 ipl.bin : ipl.nas Makefile
 	$(NASK) ipl.nas ipl.bin ipl.lst
 
-lazyos.img : ipl.bin Makefile
-	$(TOOLPATH)edimg.exe   imgin:$(TOOLPATH)fdimg0at.tek \
-		wbinimg src:ipl.bin len:512 from:0 to:0   imgout:lazyos.img
+lazyos.sys : lazyos.nas Makefile
+	$(NASK) lazyos.nas lazyos.sys lazyos.lst
+
+lazyos.img : ipl.bin lazyos.sys Makefile
+	$(EDIMG)   imgin:$(FDIMAGE0_BIN) \
+		wbinimg src:ipl.bin len:512 from:0 to:0 \
+		copy from:lazyos.sys to:@: \
+		imgout:lazyos.img
 
 # 其他指令
 
@@ -41,6 +46,8 @@ install :
 clean :
 	-del ipl.bin
 	-del ipl.lst
+	-del lazyos.bin
+	-del lazyos.lst
 
 src_only :
 	$(MAKE) clean

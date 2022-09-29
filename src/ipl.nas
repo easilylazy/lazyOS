@@ -42,7 +42,7 @@ entry:
 		MOV DH, 0	; side
 		MOV CL, 2	; sector(base=1), 1st sector is ipl (this file)
 		MOV AL, 1	; num of sector
-		MOV BX, 0XA000	; load here
+		MOV BX, 0X0820	; load here
 		MOV ES, BX
 		MOV BX, 0
 		INT 0X13
@@ -78,6 +78,7 @@ next:
 		MOV DH, 0
 		ADD CH, 1
 		CMP CH, CYLS
+		JB readloop
 		MOV SI, msg
 		JBE putloop
 error:
@@ -96,8 +97,7 @@ putloop:
 		INT		0x10			; 调用显卡BIOS
 		JMP		putloop
 fin:
-		HLT						; 让CPU停止，等待指令
-		JMP		fin				; 无限循环
+		JMP		0xc200			; go to lazyos
 
 msg:
 		DB		0x0a, 0x0a		; 换行两次
