@@ -1,39 +1,47 @@
+TOOLPATH = ../z_tools/
+
+MAKE     = $(TOOLPATH)make.exe -r
+NASK     = $(TOOLPATH)nask.exe
+EDIMG    = $(TOOLPATH)edimg.exe
+IMGOUT	 = $(TOOLPATH)imgtol.com
+
+FDIMAGE0_BIN = ..\z_tools\qemu\fdimage0.bin
 
 # 默认动作
 
 default :
-	../z_tools/make.exe img
+	$(MAKE) img
 
 # 镜像文件生成
 
 ipl.bin : ipl.nas Makefile
-	../z_tools/nask.exe ipl.nas ipl.bin ipl.lst
+	$(NASK) ipl.nas ipl.bin ipl.lst
 
 lazyos.img : ipl.bin Makefile
-	../z_tools/edimg.exe   imgin:../z_tools/fdimg0at.tek \
+	$(TOOLPATH)edimg.exe   imgin:$(TOOLPATH)fdimg0at.tek \
 		wbinimg src:ipl.bin len:512 from:0 to:0   imgout:lazyos.img
 
 # 其他指令
 
 asm :
-	../z_tools/make.exe -r ipl.bin
+	$(MAKE) ipl.bin
 
 img :
-	../z_tools/make.exe -r lazyos.img
+	$(MAKE) lazyos.img
 
 run :
-	../z_tools/make.exe img
-	copy lazyos.img ..\z_tools\qemu\fdimage0.bin
-	../z_tools/make.exe -C ../z_tools/qemu
+	$(MAKE) img
+	copy lazyos.img $(FDIMAGE0_BIN)
+	$(MAKE) -C $(TOOLPATH)qemu
 
 install :
-	../z_tools/make.exe img
-	../z_tools/imgtol.com w a: lazyos.img
+	$(MAKE) img
+	$(IMGOUT) w a: lazyos.img
 
 clean :
 	-del ipl.bin
 	-del ipl.lst
 
 src_only :
-	../z_tools/make.exe clean
+	$(MAKE) clean
 	-del lazyos.img
