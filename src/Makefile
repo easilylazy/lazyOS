@@ -22,6 +22,9 @@ default :
 ipl.bin : ipl.nas Makefile
 	$(NASK) ipl.nas ipl.bin ipl.lst
 
+asmhead.bin : asmhead.nas Makefile
+	$(NASK) asmhead.nas asmhead.bin asmhead.lst
+
 bootpack.gas : bootpack.c Makefile
 	$(CC1) -o bootpack.gas bootpack.c
 
@@ -35,11 +38,11 @@ bootpack.bim : bootpack.obj Makefile
 	$(OBJ2BIM) @$(RULEFILE) out:bootpack.bim stack:3136k map:bootpack.map \
 		bootpack.obj
 
-asmhead.bin : asmhead.nas Makefile
-	$(NASK) asmhead.nas asmhead.bin asmhead.lst
+bootpack.hrb : bootpack.bim Makefile
+	$(BIM2HRB) bootpack.bim bootpack.hrb 0
 
-lazyos.sys : lazyos.nas Makefile
-	$(NASK) lazyos.nas lazyos.sys lazyos.lst
+lazyos.sys : asmhead.bin bootpack.hrb Makefile
+	copy /B asmhead.bin+bootpack.hrb lazyos.sys
 
 lazyos.img : ipl.bin lazyos.sys Makefile
 	$(EDIMG)   imgin:$(FDIMAGE0_BIN) \
@@ -67,13 +70,14 @@ install :
 clean :
 	-del ipl.bin
 	-del ipl.lst
-	-del lazyos.bin
-	-del lazyos.lst
+	-del asmhead.bin
+	-del asmhead.lst
 	-del bootpack.gas
 	-del bootpack.nas
 	-del bootpack.obj
 	-del bootpack.bim
 	-del bootpack.map
+	-del bootpack.hrb
 
 src_only :
 	$(MAKE) clean

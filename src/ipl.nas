@@ -97,6 +97,7 @@ putloop:
 		INT		0x10			; 调用显卡BIOS
 		JMP		putloop
 fin:
+		MOV		[0x0ff0],CH		; 引导扇区柱面数（见asmhead.nas)
 		JMP		0xc200			; go to lazyos
 
 msg:
