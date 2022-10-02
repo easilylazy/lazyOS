@@ -18,7 +18,7 @@ BIN2OBJ  = $(TOOLPATH)bin2obj.exe
 
 FDIMAGE0_BIN = ..\z_tools\qemu\fdimage0.bin
 
-OBJS_BOOTPACK = bootpack.obj display.obj naskfunc.obj $(FONTS_PATH)hankaku.obj
+OBJS_BOOTPACK = bootpack.obj display.obj gdt.obj irq.obj naskfunc.obj $(FONTS_PATH)hankaku.obj
 
 SUBDIRS := $(wildcard */.)
 

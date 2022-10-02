@@ -47,4 +47,4 @@ void drawBox(char *vram, int x, int y, int w, int h, int color);
 void putfont8(char *vram, int x, int y, char *fonts, char color);
 void putStr(char *vram, int x, int y, char *s, char color);
 void init_mouse_cursor8(char *mouse, char bc);
-void init_bg_color(char *vram, char bc, int width, int height);
+void init_bg_color(Display *display);

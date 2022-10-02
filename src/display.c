@@ -1,8 +1,8 @@
 #include "display.h"
 
-void init_bg_color(char *vram, char bc, int width, int height)
+void init_bg_color(Display *display)
 {
-    drawBox(vram, 0, 0, width, height, bc);
+    drawBox(display->vram, 0, 0, display->width, display->height, display->bgcolor);
 }
 
 void init_mouse_cursor8(char *mouse, char bc)
