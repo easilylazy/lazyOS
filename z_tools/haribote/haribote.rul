@@ -1,19 +1,19 @@
 format:
-	/* ‚±‚ÌƒZƒNƒVƒ‡ƒ“‚ÅƒŠƒ“ƒN‚Ì•ûj‚ð‹Lq */
+	/* åœ¨æœ¬èŠ‚ä¸­æè¿°ä½ çš„é“¾æŽ¥æ”¿ç­– */
 	code(align:1, logic:0x24,      file:0x24);
 	data(align:4, logic:stack_end, file:code_end);
 
 file:
-	/* ‚±‚ÌƒZƒNƒVƒ‡ƒ“‚ÅƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚É‘‚«‚«‚ê‚È‚©‚Á‚½
-		.objƒtƒ@ƒCƒ‹A.libƒtƒ@ƒCƒ‹‚ð‹LÚ */
-	/* ‚È‚¨A‚±‚ÌƒZƒNƒVƒ‡ƒ“‚Íƒtƒ‹ƒpƒX‚Å‘‚¢‚Ä‚à‚æ‚¢B */
-	/* —áF  c:/osask/gg00libc.lib;  */
+	/* æœ¬èŠ‚ä¸­æè¿°äº†æ— æ³•åœ¨å‘½ä»¤è¡Œä¸­å†™å…¥çš„.objå’Œ.libæ–‡ä»¶ */
+    
+	/* è¯·æ³¨æ„ï¼Œæœ¬èŠ‚å¯å†™æˆç»å¯¹è·¯å¾„ã€‚ */
+	/* ä¾‹ï¼š  c:/osask/gg00libc.lib;  */
 	../z_tools/haribote/harilibc.lib;
 	../z_tools/haribote/golibc.lib;
 
 label:
-	/* •K‚¸ƒŠƒ“ƒN‚µ‚È‚¯‚ê‚Î‚¢‚¯‚È‚¢ƒ‰ƒxƒ‹‚ðŽw’è */
-	/* ƒGƒ“ƒgƒŠƒ|ƒCƒ“ƒg‚ðŽw’è‚·‚ê‚Î‚¢‚¢‚ÆŽv‚Á‚Ä‚­‚¾‚³‚¢ */
+	/* æŒ‡å®šå¿…é¡»è¢«é“¾æŽ¥çš„æ ‡ç­¾ */
+	/* åªæ˜¯å‡è®¾ä½ å¯ä»¥æŒ‡å®šä¸€ä¸ªå…¥å£ç‚¹ */
 	_HariStartup;
 
-	/* ã‹L3ƒZƒNƒVƒ‡ƒ“‚Ì‡˜‚Í“ü‚ê‘Ö‚¦‚Ä‚Í‚¢‚¯‚Ü‚¹‚ñ! */
+	/* ä¸Šè¿°ä¸‰éƒ¨åˆ†çš„é¡ºåºä¸èƒ½äº’æ¢ï¼è¦æœ‰é’ˆå¯¹æ€§åœ°è¿›è¡Œã€‚ */
